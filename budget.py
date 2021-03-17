@@ -85,9 +85,29 @@ def create_spend_chart(categories):
                 chart.append("o  ")
         chart_line.append("".join(chart))   
     
-    # putting to gether the chart display
+    # putting together the chart display
     chart_display = ""
     for i in range (len(yaxis)):
         chart_display += f"{yaxis[i]:>3}" + "|" + " " + chart_line[i] + '\n'
     chart_display = chart_display + "    -" + ("---"*len(categories))
     print (chart_display)
+    
+    # printing xaxis category
+    cat_length = 0
+    cat_name = []
+    xaxis = ""
+    for i in range (len(categories)):
+        cat_name.append(list(categories[i].CategoryName))
+        if len(categories[i].CategoryName)> cat_length:
+            cat_length = len(categories[i].CategoryName)
+        
+    for x in range(cat_length):
+        nameStr = "     "
+        for i in range(len(cat_name)):
+            if x >= len(cat_name[i]):
+                nameStr += "   "
+            else:
+                nameStr += cat_name[i][x] + "  "
+        nameStr += '\n'
+        xaxis += nameStr
+    print (xaxis)
