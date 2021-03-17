@@ -71,7 +71,7 @@ def create_spend_chart(categories):
         category_percent.append(percent)
     
     # print out chart
-    print ("Percentage spent by category")
+    #print ("Percentage spent by category")
 
     # generating a line on the chart
     chart_line = []
@@ -90,7 +90,7 @@ def create_spend_chart(categories):
     for i in range (len(yaxis)):
         chart_display += f"{yaxis[i]:>3}" + "|" + " " + chart_line[i] + '\n'
     chart_display = chart_display + "    -" + ("---"*len(categories))
-    print (chart_display)
+    #print (chart_display)
     
     # printing xaxis category
     cat_length = 0
@@ -110,4 +110,5 @@ def create_spend_chart(categories):
                 nameStr += cat_name[i][x] + "  "
         nameStr += '\n'
         xaxis += nameStr
-    print (xaxis)
+    #print (xaxis)
+    return "Percentage spent by category" + '\n' + chart_display + '\n' + xaxis[:-1]
