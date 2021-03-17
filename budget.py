@@ -49,3 +49,45 @@ class Category:
         return output
 
 def create_spend_chart(categories):
+    
+    # calculate expenses in each category
+    category_spend = []
+
+    for i in range (len(categories)):
+        spend_in_ledger = []
+        for j in range (len(categories[i].ledger)):
+            if categories[i].ledger[j]["amount"]<0:
+                spend_in_ledger.append(categories[i].ledger[j]["amount"])
+        total_spend_in_ledger = sum(spend_in_ledger)
+        category_spend.append(total_spend_in_ledger)
+    
+    # calculate total expenses
+    total_spend = sum(category_spend)
+    
+    # calculate % expenditure
+    category_percent = []
+    for i in range (len(category_spend)):
+        percent = (int(category_spend[i]/total_spend*10))*10
+        category_percent.append(percent)
+    
+    # print out chart
+    print ("Percentage spent by category")
+
+    # generating a line on the chart
+    chart_line = []
+    yaxis = [x for x in range (100,-1,-10)]
+    for i in range (len(yaxis)):
+        chart = []
+        for j in range (len(category_percent)):
+            if yaxis[i] > category_percent[j]:
+                chart.append("   ")
+            else:
+                chart.append("o  ")
+        chart_line.append("".join(chart))   
+    
+    # putting to gether the chart display
+    chart_display = ""
+    for i in range (len(yaxis)):
+        chart_display += f"{yaxis[i]:>3}" + "|" + " " + chart_line[i] + '\n'
+    chart_display = chart_display + "    -" + ("---"*len(categories))
+    print (chart_display)
